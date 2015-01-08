@@ -1,0 +1,15 @@
+language: node_js
+
+node_js:
+  - "0.10"
+  - "0.11"
+
+before_script:
+  - git config --global user.email "test@hexo.io"
+  - git config --global user.name "John Doe"
+
+script:
+  - npm test
+
+after_script:
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
