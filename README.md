@@ -25,6 +25,14 @@ deploy:
 - **repo**: Repository URL
 - **message**: Commit message. The default commit message is `Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}`.
 
+## Reset
+
+Remove `.deploy_heroku` folder.
+
+``` bash
+$ rm -rf .deploy_heroku
+```
+
 ## License
 
 MIT
