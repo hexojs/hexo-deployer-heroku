@@ -23,6 +23,7 @@
   "author": "Tommy Chen <tommy351@gmail.com> (http://zespia.tw)",
   "license": "MIT",
   "devDependencies": {
+    "bluebird": "^2.9.1",
     "chai": "^1.9.1",
     "coveralls": "^2.11.2",
     "gulp": "^3.8.9",
