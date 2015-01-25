@@ -1,1 +1,1 @@
-hexo.extend.deployer.register('git', require('./lib/deployer'));
+hexo.extend.deployer.register('heroku', require('./lib/deployer'));
