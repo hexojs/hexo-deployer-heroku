@@ -1,6 +1,6 @@
 {
   "name": "hexo-deployer-heroku",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Heroku deployer plugin of Hexo.",
   "main": "index",
   "scripts": {
