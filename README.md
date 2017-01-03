@@ -20,10 +20,12 @@ deploy:
   type: heroku
   repo: <repository url>
   message: [message]
+  directory: [directory]
 ```
 
 - **repo**: Repository URL
 - **message**: Commit message. The default commit message is `Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}`.
+- **directory**: Directory. The default directory is `public`.
 
 ## Reset
 
