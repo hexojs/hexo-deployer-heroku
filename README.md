@@ -20,10 +20,12 @@ deploy:
   type: heroku
   repo: <repository url>
   message: [message]
+  nginx_conf: nginx.conf
 ```
 
 - **repo**: Repository URL
 - **message**: Commit message. The default commit message is `Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}`.
+- **nginx_conf**: Nginx configuration file (defaults disabled). It could be suitable for stablishing `gzip` compression or other cache policies.
 
 ## Reset
 

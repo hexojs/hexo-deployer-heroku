@@ -13,6 +13,7 @@ describe('Heroku deployer', function() {
   var publicDir = pathFn.join(baseDir, 'public');
   var fakeRemote = pathFn.join(baseDir, 'remote');
   var validateDir = pathFn.join(baseDir, 'validate');
+  var fixturesDir = pathFn.join(__dirname, 'fixtures');
 
   var ctx = {
     base_dir: baseDir,
@@ -33,24 +34,20 @@ describe('Heroku deployer', function() {
     });
   }
 
-  before(function() {
-    return fs.writeFile(pathFn.join(publicDir, 'foo.txt'), 'foo');
-  });
-
   beforeEach(function() {
     // Create a bare repo as a fake remote repo
-    return fs.mkdirs(fakeRemote).then(function() {
+    return fs.writeFile(pathFn.join(publicDir, 'foo.txt'), 'foo').then(function() {
+      return fs.mkdirs(fakeRemote);
+    }).then(function() {
       return spawn('git', ['init', '--bare', fakeRemote]);
     });
-  });
-
-  after(function() {
-    return fs.rmdir(baseDir);
   });
 
   afterEach(function() {
     return fs.rmdir(fakeRemote).then(function() {
       return fs.rmdir(validateDir);
+    }).then(function() {
+      return fs.rmdir(baseDir);
     });
   });
 
@@ -71,6 +68,16 @@ describe('Heroku deployer', function() {
     });
   }
 
+  function validateNginxConf(confFile) {
+    return clone().then(function() {
+      // Check Procfile
+      return compareFile(pathFn.join(fixturesDir, 'Procfile'), pathFn.join(validateDir, 'Procfile'));
+    }).then(function() {
+      // Check conf file
+      return compareFile(pathFn.join(__dirname, 'fixtures', confFile), pathFn.join(validateDir, confFile));
+    });
+  }
+
   it('default', function() {
     return deployer({
       repo: fakeRemote,
@@ -82,7 +89,7 @@ describe('Heroku deployer', function() {
 
   it('server test');
 
-  it.skip('custom message', function() {
+  it('custom message', function() {
     return deployer({
       repo: fakeRemote,
       message: 'custom message',
@@ -93,6 +100,18 @@ describe('Heroku deployer', function() {
       return spawn('git', ['log', '-1', '--pretty=format:%s'], {cwd: validateDir});
     }).then(function(content) {
       content.should.eql('custom message');
+    });
+  });
+
+  it('nginx conf', function() {
+    var confFile = 'nginx.conf.php';
+
+    return deployer({
+      repo: fakeRemote,
+      nginx_conf: pathFn.join('test', 'fixtures', confFile),
+      silent: true
+    }).then(function() {
+      return validateNginxConf(confFile);
     });
   });
 });
