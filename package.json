@@ -9,8 +9,14 @@
     "test-cov": "istanbul cover --print both _mocha -- test/index.js"
   },
   "directories": {
-    "lib": "./lib"
+    "lib": "./lib",
+    "assets": "./assets"
   },
+  "files": [
+    "index.js",
+    "lib/",
+    "assets/"
+  ],
   "repository": "hexojs/hexo-deployer-heroku",
   "homepage": "https://hexo.io/",
   "keywords": [
