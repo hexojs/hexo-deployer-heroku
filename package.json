@@ -6,7 +6,7 @@
   "scripts": {
     "eslint": "eslint .",
     "test": "mocha test/index.js",
-    "test-cov": "istanbul cover --print both _mocha -- test/index.js"
+    "test-cov": "nyc npm run test"
   },
   "directories": {
     "lib": "./lib",
@@ -35,8 +35,8 @@
     "chai": "^4.2.0",
     "eslint": "^6.1.0",
     "eslint-config-hexo": "^3.0.0",
-    "istanbul": "^0.4.3",
-    "mocha": "^6.0.2"
+    "mocha": "^6.0.2",
+    "nyc": "^14.1.1"
   },
   "dependencies": {
     "chalk": "^2.4.1",
