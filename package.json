@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "chalk": "^2.4.1",
-    "hexo-fs": "^1.0.0",
+    "hexo-fs": "^2.0.0",
     "hexo-util": "^1.0.0",
     "moment": "^2.13.0",
     "swig": "^1.4.2"
