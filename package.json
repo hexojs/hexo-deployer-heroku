@@ -39,7 +39,7 @@
     "nyc": "^15.0.0"
   },
   "dependencies": {
-    "chalk": "^2.4.1",
+    "chalk": "^4.1.0",
     "hexo-fs": "^2.0.0",
     "hexo-util": "^1.0.0",
     "moment": "^2.13.0",
