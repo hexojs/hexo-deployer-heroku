@@ -18,6 +18,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Dependencies
         run: npm install
+      - name: git-config
+        run: git config --global user.email "you@example.com" && git config --global user.name "Your Name"
       - name: Test
         run: npm test -- --no-parallel
         env:
@@ -36,6 +38,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Dependencies
         run: npm install
+      - name: git-config
+        run: git config --global user.email "you@example.com" && git config --global user.name "Your Name"
       - name: Coverage
         run: npm run test-cov
         env:
