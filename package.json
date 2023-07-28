@@ -42,7 +42,6 @@
     "hexo-fs": "^4.1.1",
     "hexo-util": "^2.5.0",
     "moment": "^2.29.1",
-    "nunjucks": "^3.2.3",
     "picocolors": "^1.0.0"
   },
   "engines": {
