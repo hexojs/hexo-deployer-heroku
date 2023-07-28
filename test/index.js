@@ -1,8 +1,8 @@
 'use strict';
 
-const should = require('chai').should(); // eslint-disable-line
+require('chai').should(); // eslint-disable-line
 const pathFn = require('path');
-const spawn = require('hexo-util/lib/spawn');
+const { spawn } = require('hexo-util');
 const fs = require('hexo-fs');
 const Promise = require('bluebird');
 
