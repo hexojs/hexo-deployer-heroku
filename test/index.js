@@ -4,6 +4,8 @@ require('chai').should(); // eslint-disable-line
 const pathFn = require('path');
 const { spawn } = require('hexo-util');
 const fs = require('hexo-fs');
+const { stub, assert: sinonAssert } = require('sinon');
+const { underline } = require('picocolors');
 const Promise = require('bluebird');
 
 const assetDir = pathFn.join(__dirname, '../assets');
@@ -11,6 +13,7 @@ const assetDir = pathFn.join(__dirname, '../assets');
 describe('Heroku deployer', () => {
   const baseDir = pathFn.join(__dirname, 'deployer_test');
   const publicDir = pathFn.join(baseDir, 'public');
+  const deployDir = pathFn.join(baseDir, '.deploy_heroku');
   const fakeRemote = pathFn.join(baseDir, 'remote');
   const validateDir = pathFn.join(baseDir, 'validate');
 
@@ -93,6 +96,34 @@ describe('Heroku deployer', () => {
       return spawn('git', ['log', '-1', '--pretty=format:%s'], {cwd: validateDir});
     }).then(content => {
       content.should.eql('custom message');
+    });
+  });
+
+  it('without repo and repository', () => {
+    fs.mkdirSync(validateDir);
+    const logStub = stub(console, 'log');
+    process.env.HEXO_DEPLOYER_REPO = '';
+    deployer({});
+    let help = '';
+    help += 'You have to configure the deployment settings in _config.yml first!\n\n';
+    help += 'Example:\n';
+    help += '  deploy:\n';
+    help += '    type: heroku\n';
+    help += '    repo: <repository url>\n';
+    help += '    message: [message]\n\n';
+    help += 'For more help, you can check the docs: ' + underline('http://hexo.io/docs/deployment.html');
+    sinonAssert.calledWithMatch(logStub, help);
+    logStub.restore();
+  });
+
+  it('exist deployDir', () => {
+    return fs.mkdirs(deployDir).then(() => {
+      return deployer({
+        repo: fakeRemote,
+        silent: true
+      });
+    }).then(() => {
+      return validate();
     });
   });
 });

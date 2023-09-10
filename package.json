@@ -36,7 +36,8 @@
     "eslint": "^8.6.0",
     "eslint-config-hexo": "^5.0.0",
     "mocha": "^10.2.0",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "sinon": "^15.2.0"
   },
   "dependencies": {
     "hexo-fs": "^4.1.1",
